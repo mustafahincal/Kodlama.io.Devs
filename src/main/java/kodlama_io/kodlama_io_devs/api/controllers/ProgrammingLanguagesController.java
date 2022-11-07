@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/programminglanguage")
+@RequestMapping("/api/programminglanguages")
 public class ProgrammingLanguagesController {
     private ProgrammingLanguageService programmingLanguageService;
     public ProgrammingLanguagesController(ProgrammingLanguageService programmingLanguageService){
