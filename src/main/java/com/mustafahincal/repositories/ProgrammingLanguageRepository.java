@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProgrammingLanguageRepository extends JpaRepository<ProgrammingLanguage,Integer> {
+    boolean existsByName(String name);
 }

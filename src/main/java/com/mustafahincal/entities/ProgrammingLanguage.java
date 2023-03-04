@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "programming_languages")
@@ -19,4 +20,6 @@ public class ProgrammingLanguage {
     private int id;
     @Column(name = "name")
     private String name;
+    @OneToMany(mappedBy = "programmingLanguage")
+    private List<SubTechnology> subTechnologies;
 }
