@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class ProgrammingLanguageBusinessRules {
     private ProgrammingLanguageRepository programmingLanguageRepository;
 
-    public void checkIfBrandNameExists(String name) {
+    public void checkIfProgrammingLanguageNameExists(String name) {
         if (this.programmingLanguageRepository.existsByName(name)) {
             throw new BusinessException("Programming Language name already exists"); //Java exception types
         }

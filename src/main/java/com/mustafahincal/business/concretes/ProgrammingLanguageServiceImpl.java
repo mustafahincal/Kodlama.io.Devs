@@ -4,6 +4,7 @@ import com.mustafahincal.business.abstracts.ProgrammingLanguageService;
 import com.mustafahincal.business.requests.ProgrammingLanguageCreateRequest;
 import com.mustafahincal.business.responses.ProgrammingLanguageGetAllResponse;
 import com.mustafahincal.business.responses.ProgrammingLanguageGetByIdResponse;
+import com.mustafahincal.business.rules.ProgrammingLanguageBusinessRules;
 import com.mustafahincal.core.utilities.mappers.ModelMapperService;
 import com.mustafahincal.entities.ProgrammingLanguage;
 import com.mustafahincal.repositories.ProgrammingLanguageRepository;
@@ -16,10 +17,12 @@ import java.util.stream.Collectors;
 public class ProgrammingLanguageServiceImpl implements ProgrammingLanguageService {
 
     private ProgrammingLanguageRepository programmingLanguageRepository;
+    private ProgrammingLanguageBusinessRules programmingLanguageBusinessRules;
     private ModelMapperService modelMapperService;
-    public ProgrammingLanguageServiceImpl(ProgrammingLanguageRepository programmingLanguageRepository, ModelMapperService modelMapperService){
+    public ProgrammingLanguageServiceImpl(ProgrammingLanguageRepository programmingLanguageRepository, ModelMapperService modelMapperService, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules){
         this.programmingLanguageRepository = programmingLanguageRepository;
         this.modelMapperService = modelMapperService;
+        this.programmingLanguageBusinessRules=programmingLanguageBusinessRules;
     }
     @Override
     public List<ProgrammingLanguageGetAllResponse> getAll() {
@@ -40,6 +43,7 @@ public class ProgrammingLanguageServiceImpl implements ProgrammingLanguageServic
 
     @Override
     public void add(ProgrammingLanguageCreateRequest programmingLanguageCreateRequest) {
+        this.programmingLanguageBusinessRules.checkIfProgrammingLanguageNameExists(programmingLanguageCreateRequest.getName());
 
         ProgrammingLanguage programmingLanguage = this.modelMapperService.forRequest().map(programmingLanguageCreateRequest,ProgrammingLanguage.class);
         this.programmingLanguageRepository.save(programmingLanguage);
